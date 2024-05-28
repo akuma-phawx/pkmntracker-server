@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", async (req: Request, res: Response) => {
   try {
     const { rows } = await pool.query("SELECT * FROM cards");
+    console.log(pool);
     res.json(rows);
   } catch (error) {
     console.error("Error fetching cards:", error);
