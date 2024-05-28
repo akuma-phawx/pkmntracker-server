@@ -6,14 +6,13 @@ config();
 const app: Express = express();
 // Middleware to parse JSON bodies into `req.body`
 app.use(express.json());
-app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // Mount API routes
 app.use("/api/cards", cardRoutes);
 app.use("/api/sets", setRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 // Start the server
-app.listen(8088, () => {
+app.listen(PORT, () => {
   console.log(`Pkmntracker server is running on http://localhost:${PORT}`);
 });
