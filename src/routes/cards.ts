@@ -14,13 +14,12 @@ router.get("/", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
-// GET /api/cards/:id
-router.get("/:id", async (req: Request, res: Response) => {
-  const cardId = req.params.id;
+// search a card by name
+router.get("/search/:name", async (req: Request, res: Response) => {
+  const cardName = req.params.name;
   try {
-    const { rows } = await pool.query("SELECT * FROM cards WHERE id = $1", [
-      cardId,
+    const { rows } = await pool.query("SELECT * FROM cards WHERE name = $1", [
+      cardName,
     ]);
     if (rows.length === 0) {
       res.status(404).json({ message: "Card not found" });
@@ -33,12 +32,12 @@ router.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
-// search a card by name
-router.get("/search/:name", async (req: Request, res: Response) => {
-  const cardName = req.params.name;
+// GET /api/cards/:id
+router.get("/:id", async (req: Request, res: Response) => {
+  const cardId = req.params.id;
   try {
-    const { rows } = await pool.query("SELECT * FROM cards WHERE name = $1", [
-      cardName,
+    const { rows } = await pool.query("SELECT * FROM cards WHERE id = $1", [
+      cardId,
     ]);
     if (rows.length === 0) {
       res.status(404).json({ message: "Card not found" });
