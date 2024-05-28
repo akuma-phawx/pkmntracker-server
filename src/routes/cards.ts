@@ -34,7 +34,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 // search a card by name
-router.get("/search/cards/:name", async (req: Request, res: Response) => {
+router.get("/search/:name", async (req: Request, res: Response) => {
   const cardName = req.params.name;
   try {
     const { rows } = await pool.query("SELECT * FROM cards WHERE name = $1", [

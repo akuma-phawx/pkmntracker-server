@@ -33,7 +33,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 //find set by name
-router.get("/search/sets/:name", async (req: Request, res: Response) => {
+router.get("/search/:name", async (req: Request, res: Response) => {
   const setName = req.params.name;
   try {
     const { rows } = await pool.query("SELECT * FROM sets WHERE name = $1", [
