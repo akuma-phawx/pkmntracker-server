@@ -32,6 +32,24 @@ router.get("/search/:name", async (req: Request, res: Response) => {
   }
 });
 
+//get cards by set id
+router.get("/set/:id", async (req: Request, res: Response) => {
+  const setId = req.params.id;
+  try {
+    const { rows } = await pool.query("SELECT * FROM cards WHERE set_id = $1", [
+      setId,
+    ]);
+    if (rows.length === 0) {
+      res.status(404).json({ message: "Card not found" });
+    } else {
+      res.json(rows);
+    }
+  } catch (error) {
+    console.error("Error fetching card:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 // GET /api/cards/:id
 router.get("/:id", async (req: Request, res: Response) => {
   const cardId = req.params.id;
