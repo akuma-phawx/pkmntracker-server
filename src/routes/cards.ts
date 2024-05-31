@@ -1,11 +1,12 @@
 import express, { Request, Response } from "express";
 import pool from "../utils/pool";
+import { Card } from "@/types/card";
 
 const router = express.Router();
 
 /**
  * Retrieves all cards from the database.
- * @returns {Promise<Array<any>>} A promise that resolves to an array of cards.
+ * @returns {Promise<Array<Card>>} A promise that resolves to an array of cards.
  */
 router.get("/", async (req: Request, res: Response) => {
   try {
@@ -22,7 +23,7 @@ router.get("/", async (req: Request, res: Response) => {
  * Retrieves cards from the database based on the provided card name.
  *
  * @param {string} name - The name of the card to search for.
- * @returns {Promise<any>} - A promise that resolves to the retrieved cards.
+ * @returns {Promise<Array<Card>} - A promise that resolves to the retrieved cards.
  */
 router.get("/search/:name", async (req: Request, res: Response) => {
   const cardName = req.params.name;
@@ -45,7 +46,7 @@ router.get("/search/:name", async (req: Request, res: Response) => {
  * Retrieves cards from the database based on the provided set ID.
  *
  * @param {string} id - The ID of the set to search for.
- * @returns {Promise<any>} - A promise that resolves to the retrieved cards.
+ * @returns {Promise<Array<Card>} - A promise that resolves to the retrieved cards.
  */
 router.get("/set/:id", async (req: Request, res: Response) => {
   const setId = req.params.id;
@@ -68,7 +69,7 @@ router.get("/set/:id", async (req: Request, res: Response) => {
  * Retrieves a card from the database based on the provided card ID.
  *
  * @param {string} id - The ID of the card to search for.
- * @returns {Promise<any>} - A promise that resolves to the retrieved card.
+ * @returns {Promise<Card>} - A promise that resolves to the retrieved card.
  */
 router.get("/:id", async (req: Request, res: Response) => {
   const cardId = req.params.id;
