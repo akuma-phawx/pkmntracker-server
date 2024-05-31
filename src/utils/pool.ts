@@ -2,6 +2,10 @@ import { Pool } from "pg";
 import { config } from "dotenv";
 
 config();
+
+/**
+ * Connection pool to the PostgreSQL database.
+ */
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
